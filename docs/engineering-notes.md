@@ -1,0 +1,13 @@
+# Requirements
+- [ ] Create /docs/engineering-notes.md and /docs/pull-request.md
+- [ ] Create migration for users table
+- [ ] Install authentication
+- [ ] Create Users controller
+- [ ] Create API routes
+- [ ] Create UserPolicy
+- [ ] Implement model accessors
+- [ ] Implement CreateUser, UpdateUser and DeleteUser application actions.
+- [ ] Create unit tests
+- [ ] Create audit log for destructive actions
+- [ ] Impose rate limiting on user creation
+- [ ] Create CI pipeline for tests and static analysis
