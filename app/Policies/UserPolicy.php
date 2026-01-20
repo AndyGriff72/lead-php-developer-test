@@ -3,63 +3,43 @@
 namespace App\Policies;
 
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class UserPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * Admins can view all users.
      */
-    public function viewAny(User $user): bool
-    {
-        return false;
+    public function viewAny(User $auth): bool {
+        return $auth->type === 'admin';
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Users can view themselves; admins can view anyone.
      */
-    public function view(User $user, User $model): bool
-    {
-        return false;
+    public function view(User $auth, User $target): bool {
+        return $auth->type === 'admin'
+            || $auth->id === $target->id;
     }
 
     /**
-     * Determine whether the user can create models.
+     * Anyone can create a user (registration).
      */
-    public function create(User $user): bool
-    {
-        return false;
+    public function create(?User $auth): bool {
+        return true;
     }
 
     /**
-     * Determine whether the user can update the model.
+     * Users can update themselves; admins can update anyone.
      */
-    public function update(User $user, User $model): bool
-    {
-        return false;
+    public function update(User $auth, User $target): bool {
+        return $auth->type === 'admin'
+            || $auth->id === $target->id;
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Only admins may delete users.
      */
-    public function delete(User $user, User $model): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can restore the model.
-     */
-    public function restore(User $user, User $model): bool
-    {
-        return false;
-    }
-
-    /**
-     * Determine whether the user can permanently delete the model.
-     */
-    public function forceDelete(User $user, User $model): bool
-    {
-        return false;
+    public function delete(User $auth, User $target): bool {
+        return $auth->type === 'admin';
     }
 }
