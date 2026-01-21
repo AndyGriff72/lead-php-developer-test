@@ -8,14 +8,16 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UpdateUserTest extends TestCase {
+class UpdateUserTest extends TestCase
+{
     use RefreshDatabase;
 
     /**
      * Test that CreateUser creates a user and that the user subsequently
      * exists in the database.
      */
-    public function testUpdateUser(): void {
+    public function testUpdateUser(): void
+    {
         $updateUserData = [
             'email' => 'test2@example.com',
             'firstname' => 'Testing',

@@ -4,7 +4,8 @@ namespace App\Actions;
 
 use App\Models\User;
 
-class UpdateUser {
+class UpdateUser
+{
     /**
      * Update a user with specified request data.
      *
@@ -12,9 +13,10 @@ class UpdateUser {
      * @param array $requestData The data with which to update the user record.
      * @return User Returns updated user model.
      */
-    public function execute(User $user, array $requestData): User {
+    public function execute(User $user, array $requestData): User
+    {
         $user->update($requestData);
-        
+
         return $user;
     }
 }

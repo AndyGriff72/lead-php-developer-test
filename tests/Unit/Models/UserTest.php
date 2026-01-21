@@ -8,7 +8,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
-class UserTest extends TestCase {
+class UserTest extends TestCase
+{
     use RefreshDatabase;
 
     /**
@@ -18,7 +19,8 @@ class UserTest extends TestCase {
      * @param string $expected Expected value returned from fullname().
      */
     #[DataProvider('providerTestFullnameAccessor')]
-    public function testFullnameAccessor(string $firstname, string $middlename, string $lastname, string $expected): void {
+    public function testFullnameAccessor(string $firstname, string $middlename, string $lastname, string $expected): void
+    {
         $user = User::factory()->create();
         $updated = (new UpdateUser())->execute($user, [
             'firstname' => $firstname,
@@ -29,7 +31,8 @@ class UserTest extends TestCase {
         $this->assertEquals($expected, $updated->fullname());
     }
 
-    public static function providerTestFullnameAccessor(): array {
+    public static function providerTestFullnameAccessor(): array
+    {
         return [
             ['Test', 'User', 'A', 'Test User A'],
             ['Test User', '', 'B', 'Test User B'],
@@ -44,7 +47,8 @@ class UserTest extends TestCase {
      * @param string $expected Expected value returned from middleinitial().
      */
     #[DataProvider('providerTestMiddleinitialAccessor')]
-    public function testMiddleinitialAccessor(string $firstname, string $middlename, string $lastname, string $expected): void {
+    public function testMiddleinitialAccessor(string $firstname, string $middlename, string $lastname, string $expected): void
+    {
         $user = User::factory()->create();
         $updated = (new UpdateUser())->execute($user, [
             'firstname' => $firstname,
@@ -55,7 +59,8 @@ class UserTest extends TestCase {
         $this->assertEquals($expected, $updated->middleinitial());
     }
 
-    public static function providerTestMiddleinitialAccessor(): array {
+    public static function providerTestMiddleinitialAccessor(): array
+    {
         return [
             ['Test', 'User', 'A', 'U'],
             ['Test', '', 'User B', ''],
@@ -68,7 +73,8 @@ class UserTest extends TestCase {
      * @param string|null $expected Expected value returned from avatar().
      */
     #[DataProvider('providerTestAvatarAccessor')]
-    public function testAvatarAccessor(string $photo, ?string $expected = null): void {
+    public function testAvatarAccessor(string $photo, ?string $expected = null): void
+    {
         $user = User::factory()->create();
         $updated = (new UpdateUser())->execute($user, [
             'photo' => $photo,
@@ -77,7 +83,8 @@ class UserTest extends TestCase {
         $this->assertEquals($expected ? url($expected) : $expected, $updated->avatar());
     }
 
-    public static function providerTestAvatarAccessor(): array {
+    public static function providerTestAvatarAccessor(): array
+    {
         return [
             ['testuser.png', '/storage/avatars/testuser.png'],
             ['', null],     //  An empty string will return null from the accessor.

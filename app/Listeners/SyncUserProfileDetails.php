@@ -5,11 +5,13 @@ namespace App\Listeners;
 use App\Events\UserSaved;
 use App\Models\Detail;
 
-class SyncUserProfileDetails {
+class SyncUserProfileDetails
+{
     /**
      * Handle the event.
      */
-    public function handle(UserSaved $event): void {
+    public function handle(UserSaved $event): void
+    {
         $user = $event->user;
 
         $keyMap = [
@@ -20,14 +22,16 @@ class SyncUserProfileDetails {
         ];
 
         foreach ($keyMap as $key => $value) {
-            $user->details()->updateOrCreate([
+            $user->details()->updateOrCreate(
+                [
                 'key' => $key,
                 'user_id' => $user->id,
-            ], 
-            [
+            ],
+                [
                 'value' => $value,
                 'type' => Detail::TYPE_PROFILE,
-            ]);
+            ]
+            );
         }
     }
 
@@ -38,7 +42,8 @@ class SyncUserProfileDetails {
      * @param string $prefixname The title prefix of the user.
      * @return string Returns one of "Male", "Female", "Non-binary" or "Unknown".
      */
-    public function deriveGender(string $prefixname): string {
+    public function deriveGender(string $prefixname): string
+    {
         $prefixname = strtolower($prefixname);
 
         return match ($prefixname) {

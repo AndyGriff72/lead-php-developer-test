@@ -8,10 +8,12 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class HappyPathTest extends TestCase {
+class HappyPathTest extends TestCase
+{
     use RefreshDatabase;
 
-    public function testFullUserFlow(): void {
+    public function testFullUserFlow(): void
+    {
         $newUserData = [
             'prefixname' => 'Mr',
             'firstname' => 'Test',

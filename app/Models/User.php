@@ -16,7 +16,10 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -67,7 +70,8 @@ class User extends Authenticatable
      *
      * @return string Returns a concatenated string comprising user's name fields.
      */
-    public function fullname(): string {
+    public function fullname(): string
+    {
         return collect([
             $this->firstname,
             $this->middlename,
@@ -80,7 +84,8 @@ class User extends Authenticatable
      *
      * @return string Returns capitalized middle initial from middlename property.
      */
-    public function middleinitial(): string {
+    public function middleinitial(): string
+    {
         return $this->middlename ? strtoupper(substr($this->middlename, 0, 1)) : '';
     }
 
@@ -89,7 +94,8 @@ class User extends Authenticatable
      *
      * @return
      */
-    public function avatar(): ?string {
+    public function avatar(): ?string
+    {
         //  Return as-is if `photo` is already a valid URL.
         if (preg_match('/^https?:\/\//i', $this->photo)) {
             return $this->photo;
@@ -104,7 +110,8 @@ class User extends Authenticatable
      *
      * @return HasMany Returns the one-to-many relationship object.
      */
-    public function details(): HasMany {
+    public function details(): HasMany
+    {
         return $this->hasMany(Detail::class);
     }
 }

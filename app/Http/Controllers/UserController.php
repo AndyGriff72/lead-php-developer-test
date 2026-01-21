@@ -19,7 +19,8 @@ class UserController extends Controller
     /**
      * Constructor. Set up default authorizations for UserPolicy.
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->authorizeResource(User::class, 'user');
     }
 
@@ -28,7 +29,8 @@ class UserController extends Controller
      *
      * @return JsonResponse Returns an associative array with status, data and message elements.
      */
-    public function index(): JsonResponse {
+    public function index(): JsonResponse
+    {
         $data = User::all();
 
         return (new ApiResponseFormatterService())->formatResponse(200, $data->toArray());
@@ -40,7 +42,8 @@ class UserController extends Controller
      * @param User $user The user to retrieve.
      * @return array Returns an associative array with status, data and message elements.
      */
-    public function show(User $user): JsonResponse {
+    public function show(User $user): JsonResponse
+    {
         return (new ApiResponseFormatterService())->formatResponse(200, $user->toArray());
     }
 
@@ -50,7 +53,8 @@ class UserController extends Controller
      * @param CreateUserRequest $request The API request body containing new data.
      * @return array Returns an associative array with status, data and message elements.
      */
-    public function store(CreateUserRequest $request): JsonResponse {
+    public function store(CreateUserRequest $request): JsonResponse
+    {
         $user = (new CreateUser())->execute($request->validated());
 
         return (new ApiResponseFormatterService())->formatResponse(201, $user->toArray());
@@ -63,7 +67,8 @@ class UserController extends Controller
      * @param User $user The user to update.
      * @return array Returns an associative array with status, data and message elements.
      */
-    public function update(UpdateUserRequest $request, User $user): JsonResponse {
+    public function update(UpdateUserRequest $request, User $user): JsonResponse
+    {
         $user = (new UpdateUser())->execute($user, $request->validated());
 
         return (new ApiResponseFormatterService())->formatResponse(200, []);
@@ -75,7 +80,8 @@ class UserController extends Controller
      * @param User $userId The user to delete.
      * @return array Returns an associative array with status, data and message elements.
      */
-    public function destroy(User $user): JsonResponse {
+    public function destroy(User $user): JsonResponse
+    {
         $user = (new DeleteUser())->execute($user);
 
         return (new ApiResponseFormatterService())->formatResponse(204, []);

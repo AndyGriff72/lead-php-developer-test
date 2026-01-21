@@ -7,7 +7,8 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class CreateUserTest extends TestCase {
+class CreateUserTest extends TestCase
+{
     use RefreshDatabase;
 
     protected $newUserData = [
@@ -26,7 +27,8 @@ class CreateUserTest extends TestCase {
      * Test that CreateUser creates a user and that the user subsequently
      * exists in the database.
      */
-    public function testCreateUser(): void {
+    public function testCreateUser(): void
+    {
         $action = new CreateUser();
         $user = $action->execute($this->newUserData);
 
@@ -45,10 +47,11 @@ class CreateUserTest extends TestCase {
      * Test that creating two users with the same data (i.e. duplicate username and/or
      * email addresses) causes a query exception to be thrown.
      */
-    public function testCreateDuplicateUser(): void {
+    public function testCreateDuplicateUser(): void
+    {
         $action = new CreateUser();
         $action->execute($this->newUserData);
-        
+
         $this->expectException(\Illuminate\Database\QueryException::class);
         $action->execute($this->newUserData);
     }

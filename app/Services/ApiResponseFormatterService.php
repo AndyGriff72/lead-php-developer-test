@@ -4,8 +4,10 @@ namespace App\Services;
 
 use Illuminate\Http\JsonResponse;
 
-class ApiResponseFormatterService {
-    public function __construct() {
+class ApiResponseFormatterService
+{
+    public function __construct()
+    {
     }
 
     /**
@@ -16,7 +18,8 @@ class ApiResponseFormatterService {
      * @param string $message Any relevant error or status message.
      * @return JsonResponse
      */
-    public function formatResponse(int $status, ?array $data = [], ?string $message = ''): JsonResponse {
+    public function formatResponse(int $status, ?array $data = [], ?string $message = ''): JsonResponse
+    {
         return response()->json([
             'status' => $status,
             'data' => $data,

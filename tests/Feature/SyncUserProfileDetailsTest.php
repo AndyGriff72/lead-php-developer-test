@@ -2,19 +2,19 @@
 
 namespace Tests\Feature;
 
-use App\Events\UserSaved;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
 
-class SyncUserProfileDetailsTest extends TestCase {
+class SyncUserProfileDetailsTest extends TestCase
+{
     use RefreshDatabase;
 
     /**
      * Check all four expected `details` records are created.
      */
-    public function testSyncUserProfileDetails(): void {
+    public function testSyncUserProfileDetails(): void
+    {
         $user = User::factory()->create([
             'prefixname' => 'Mr',
             'firstname' => 'Test',

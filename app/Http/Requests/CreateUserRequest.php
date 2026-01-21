@@ -13,7 +13,8 @@ class CreateUserRequest extends FormRequest
      *
      * @return bool Returns "true" as authorization handled in policy.
      */
-    public function authorize(): bool {
+    public function authorize(): bool
+    {
         return true;
     }
 
@@ -22,7 +23,8 @@ class CreateUserRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array {
+    public function rules(): array
+    {
         return [
             'prefixname' => ['required', 'string'],
             'firstname' => ['required', 'string'],
