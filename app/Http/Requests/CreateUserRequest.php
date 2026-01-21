@@ -34,8 +34,6 @@ class CreateUserRequest extends FormRequest
             'photo' => ['required', 'string'],
             'type' => ['required', 'in:admin,user'],
         ];
-
-
     }
 
 }

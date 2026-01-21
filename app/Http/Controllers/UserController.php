@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateUser;
+use App\Actions\UpdateUser;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\ApiResponseFormatterService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -57,11 +59,13 @@ class UserController extends Controller
     /**
      * Update a single user record in the database.
      *
-     * @param Request $request The API request body.
+     * @param UpdateUserRequest $request The API request body.
      * @param User $user The user to update.
      * @return array Returns an associative array with status, data and message elements.
      */
-    public function update(Request $request, User $user): JsonResponse {
+    public function update(UpdateUserRequest $request, User $user): JsonResponse {
+        $user = (new UpdateUser())->execute($user, $request->validated());
+
         return (new ApiResponseFormatterService())->formatResponse(200, []);
     }
 
