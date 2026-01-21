@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('details', function (Blueprint $table) {
             $table->id();
             $table->string('key', 255);
-            $table->text('value');
+            $table->text('value')->nullable();
             $table->string('type', 255);
             $table->unsignedInteger('user_id');
             $table->unique(['user_id', 'key']);

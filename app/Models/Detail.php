@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Detail extends Model {
+    const TYPE_PROFILE = 'profile';
+
     /**
      * The attributes that are mass assignable.
      *

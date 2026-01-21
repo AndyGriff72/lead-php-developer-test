@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Events\UserSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -41,6 +43,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $dispatchesEvents = [
+        'saved' => UserSaved::class,
     ];
 
     /**
@@ -84,6 +90,12 @@ class User extends Authenticatable
      * @return
      */
     public function avatar(): ?string {
+        //  Return as-is if `photo` is already a valid URL.
+        if (preg_match('/^https?:\/\//i', $this->photo)) {
+            return $this->photo;
+        }
+
+        //  Not a URL.
         return $this->photo ? url(Config::get('users.avatarPath') . $this->photo) : null;
     }
 
