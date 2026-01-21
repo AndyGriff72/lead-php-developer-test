@@ -16,7 +16,7 @@ class UpdateUserTest extends TestCase {
      * exists in the database.
      */
     public function testUpdateUser(): void {
-        $updateData = [
+        $updateUserData = [
             'email' => 'test2@example.com',
             'firstname' => 'Testing',
             'lastname' => 'Account'
@@ -24,13 +24,13 @@ class UpdateUserTest extends TestCase {
 
         $user = User::factory()->create();
         $action = new UpdateUser();
-        $user = $action->execute($user, $updateData);
+        $user = $action->execute($user, $updateUserData);
 
         // Assert the user exists in the database
         $this->assertDatabaseHas('users', [
-            'email' => $updateData['email'],
-            'firstname' => $updateData['firstname'],
-            'lastname' => $updateData['lastname'],
+            'email' => $updateUserData['email'],
+            'firstname' => $updateUserData['firstname'],
+            'lastname' => $updateUserData['lastname'],
         ]);
     }
 }

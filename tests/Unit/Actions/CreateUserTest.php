@@ -10,7 +10,7 @@ use Tests\TestCase;
 class CreateUserTest extends TestCase {
     use RefreshDatabase;
 
-    protected $data = [
+    protected $newUserData = [
         'prefixname' => 'Mr',
         'firstname' => 'Test',
         'middlename' => 'A',
@@ -28,7 +28,7 @@ class CreateUserTest extends TestCase {
      */
     public function testCreateUser(): void {
         $action = new CreateUser();
-        $user = $action->execute($this->data);
+        $user = $action->execute($this->newUserData);
 
         // Assert the returned instance is a User
         $this->assertInstanceOf(User::class, $user);
@@ -47,9 +47,9 @@ class CreateUserTest extends TestCase {
      */
     public function testCreateDuplicateUser(): void {
         $action = new CreateUser();
-        $action->execute($this->data);
+        $action->execute($this->newUserData);
         
         $this->expectException(\Illuminate\Database\QueryException::class);
-        $action->execute($this->data);
+        $action->execute($this->newUserData);
     }
 }

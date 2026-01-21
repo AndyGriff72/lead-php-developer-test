@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Actions\CreateUser;
+use App\Actions\DeleteUser;
 use App\Actions\UpdateUser;
 use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\ApiResponseFormatterService;
@@ -72,11 +74,12 @@ class UserController extends Controller
     /**
      * Soft-delete a record from the database.
      *
-     * @param Request $request The API request body.
      * @param User $userId The user to delete.
      * @return array Returns an associative array with status, data and message elements.
      */
-    public function destroy(Request $request, User $user): JsonResponse {
+    public function destroy(User $user): JsonResponse {
+        $user = (new DeleteUser())->execute($user);
+
         return (new ApiResponseFormatterService())->formatResponse(204, []);
     }
 }
