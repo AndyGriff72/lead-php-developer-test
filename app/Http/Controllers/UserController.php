@@ -6,13 +6,11 @@ use App\Actions\CreateUser;
 use App\Actions\DeleteUser;
 use App\Actions\UpdateUser;
 use App\Http\Requests\CreateUserRequest;
-use App\Http\Requests\DeleteUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
 use App\Services\ApiResponseFormatterService;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
