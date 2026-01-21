@@ -8,7 +8,10 @@
 - [x] Implement model accessors
 - [x] Implement CreateUser, UpdateUser and DeleteUser application actions.
 - [x] Create unit tests
-- [ ] Create feature test
+- [x] Create happy path feature test
+- [ ] Create Detail model and details table
+- [ ] Create UserSaved event
+- [ ] Create SyncUserProfileDetails listener
 - [ ] Create audit log for destructive actions
 - [ ] Impose rate limiting on user creation
 - [ ] Create CI pipeline for tests and static analysis
