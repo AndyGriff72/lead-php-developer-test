@@ -10,9 +10,11 @@ class UpdateUser {
      *
      * @param User $user The user to update.
      * @param array $requestData The data with which to update the user record.
-     * @return bool Returns true if successful, false if not.
+     * @return User Returns updated user model.
      */
-    public function execute(User $user, array $requestData): bool {
-        return $user->update($requestData);
+    public function execute(User $user, array $requestData): User {
+        $user->update($requestData);
+        
+        return $user;
     }
 }

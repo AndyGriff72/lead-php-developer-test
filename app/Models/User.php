@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Config;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -51,5 +52,36 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Create full name string from first, middle and last names.
+     *
+     * @return string Returns a concatenated string comprising user's name fields.
+     */
+    public function fullname(): string {
+        return collect([
+            $this->firstname,
+            $this->middlename,
+            $this->lastname,
+        ])->filter()->join(' ');
+    }
+
+    /**
+     * Get user's middle initial.
+     *
+     * @return string Returns capitalized middle initial from middlename property.
+     */
+    public function middleinitial(): string {
+        return $this->middlename ? strtoupper(substr($this->middlename, 0, 1)) : '';
+    }
+
+    /**
+     * Get the user's avatar URL.
+     *
+     * @return
+     */
+    public function avatar(): ?string {
+        return $this->photo ? url(Config::get('users.avatarPath') . $this->photo) : null;
     }
 }
