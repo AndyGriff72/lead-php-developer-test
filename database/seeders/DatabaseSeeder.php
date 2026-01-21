@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
     {
          //  Admin user.
         User::factory()->create([
-            'prefixname' => 'Mr',
             'firstname' => 'Test',
             'lastname' => 'Admin',
             'username' => 'admin',
@@ -29,7 +28,6 @@ class DatabaseSeeder extends Seeder
 
         //  Regular user.
         User::factory()->create([
-            'prefixname' => 'Mr',
             'firstname' => 'Test',
             'lastname' => 'User',
             'username' => 'test',
