@@ -5,6 +5,7 @@ namespace Tests\Unit\Models;
 use App\Actions\UpdateUser;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
 
 class UserTest extends TestCase {
@@ -15,8 +16,8 @@ class UserTest extends TestCase {
      * @param string $middlename Value of `middlename` on model.
      * @param string $lastname Value of `lastname` on model.
      * @param string $expected Expected value returned from fullname().
-     * @dataProvider providerTestFullnameAccessor
      */
+    #[DataProvider('providerTestFullnameAccessor')]
     public function testFullnameAccessor(string $firstname, string $middlename, string $lastname, string $expected): void {
         $user = User::factory()->create();
         $updated = (new UpdateUser())->execute($user, [
@@ -41,8 +42,8 @@ class UserTest extends TestCase {
      * @param string $middlename Value of `middlename` on model.
      * @param string $lastname Value of `lastname` on model.
      * @param string $expected Expected value returned from middleinitial().
-     * @dataProvider providerTestMiddleinitialAccessor
      */
+    #[DataProvider('providerTestMiddleinitialAccessor')]
     public function testMiddleinitialAccessor(string $firstname, string $middlename, string $lastname, string $expected): void {
         $user = User::factory()->create();
         $updated = (new UpdateUser())->execute($user, [
@@ -65,8 +66,8 @@ class UserTest extends TestCase {
     /**
      * @param string $photo Value of `photo` on model.
      * @param string|null $expected Expected value returned from avatar().
-     * @dataProvider providerTestAvatarAccessor
      */
+    #[DataProvider('providerTestAvatarAccessor')]
     public function testAvatarAccessor(string $photo, ?string $expected = null): void {
         $user = User::factory()->create();
         $updated = (new UpdateUser())->execute($user, [
