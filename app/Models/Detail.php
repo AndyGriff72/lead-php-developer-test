@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Detail extends Model {
     /**
@@ -16,4 +17,13 @@ class Detail extends Model {
         'type',
         'user_id',
     ];
+
+    /**
+     * Get linked user record.
+     *
+     * @return BelongsTo Returns the many-to-one relationship object.
+     */
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class);
+    }
 }

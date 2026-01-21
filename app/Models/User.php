@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -84,5 +85,14 @@ class User extends Authenticatable
      */
     public function avatar(): ?string {
         return $this->photo ? url(Config::get('users.avatarPath') . $this->photo) : null;
+    }
+
+    /**
+     * Get linked details records.
+     *
+     * @return HasMany Returns the one-to-many relationship object.
+     */
+    public function details(): HasMany {
+        return $this->hasMany(Detail::class);
     }
 }
